@@ -1,0 +1,35 @@
+{
+  "name": "pi-extensions-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "biome check . && tsc --noEmit",
+    "format": "biome check --write .",
+    "test": "vitest run",
+    "test:spike": "vitest run packages/pi-extension-doctor/test/core.test.ts packages/pi-extension-doctor/test/scan.test.ts packages/pi-extension-doctor/test/pi-contract.test.ts packages/pi-extension-doctor/test/capabilities.test.ts packages/pi-extension-doctor/test/privacy.test.ts",
+    "detection:measure": "node tooling/benchmarks/run-doctor-benchmark.mjs --metrics-only",
+    "benchmark:doctor": "node tooling/benchmarks/run-doctor-benchmark.mjs",
+    "capabilities:check": "node tooling/quality/check-capabilities.mjs",
+    "supply-chain:check": "node tooling/package-checks/check-supply-chain.mjs",
+    "publish-workflow:check": "node tooling/package-checks/check-publish-workflow.mjs .github/workflows/publish.yml --output artifacts/publish-workflow-verdict.json",
+    "pack:check": "node tooling/package-checks/pack-and-smoke.mjs --pack-only",
+    "smoke": "node tooling/package-checks/pack-and-smoke.mjs",
+    "npm-security:check": "node tooling/quality/run-npm-security.mjs --output artifacts/npm-security-verdict.json",
+    "security:verdict": "node tooling/quality/check-security-verdict.mjs --generate artifacts/security-verdict.json --require PASS",
+    "demo:verify": "node tooling/demo/verify-demo.mjs --require PASS --output artifacts/demo-verdict.json"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.5",
+    "@earendil-works/pi-coding-agent": "0.80.6",
+    "@types/node": "22.19.19",
+    "typescript": "5.9.3",
+    "vitest": "3.2.6"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

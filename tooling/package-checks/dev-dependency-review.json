@@ -1,0 +1,26 @@
+{
+  "reviewedAt": "2026-07-10",
+  "expiresAt": "2026-08-09",
+  "exceptions": [
+    {
+      "violation": "maintainer-change:@biomejs/biome",
+      "version": "2.3.5",
+      "reason": "The previous-version comparison shows one maintainer removal and no new maintainer; exact integrity and npm signatures remain mandatory."
+    },
+    {
+      "violation": "release-age-gate:@earendil-works/pi-coding-agent",
+      "version": "0.80.6",
+      "reason": "This exact host version is the approved and source-verified Pi contract target; lifecycle scripts are disabled and integrity/signatures remain mandatory."
+    },
+    {
+      "violation": "maintainer-change:typescript",
+      "version": "5.9.3",
+      "reason": "The changed entries remain Microsoft-controlled release identities; exact integrity and npm signatures remain mandatory."
+    },
+    {
+      "violation": "maintainer-change:vitest",
+      "version": "3.2.6",
+      "reason": "The changed entries are established Vitest/Vite maintainers; exact integrity and npm signatures remain mandatory."
+    }
+  ]
+}

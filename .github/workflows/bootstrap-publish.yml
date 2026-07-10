@@ -1,0 +1,90 @@
+name: Bootstrap publish pi-extension-doctor
+
+# One-time first-publish bootstrap. npm trusted publishing can only be
+# configured for an existing package, so version 0.1.0 publishes with a
+# user-managed NPM_TOKEN repository secret. After 0.1.0 exists, configure
+# the OIDC trusted publisher for publish.yml and stop using this workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Approved immutable commit SHA
+        required: true
+        type: string
+      expected_workflow_sha256:
+        description: Approved bootstrap-publish.yml SHA-256
+        required: true
+        type: string
+      expected_source_sha256:
+        description: Approved package source SHA-256
+        required: true
+        type: string
+      expected_tarball_sha256:
+        description: Approved npm tarball SHA-256
+        required: true
+        type: string
+      dry_run:
+        description: Verify without publishing
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    environment: npm-publish
+    steps:
+      - name: Checkout approved ref
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: 22.19.0
+          registry-url: https://registry.npmjs.org
+
+      - name: Verify approved commit and workflow
+        env:
+          EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+          EXPECTED_WORKFLOW_SHA256: ${{ inputs.expected_workflow_sha256 }}
+        run: |
+          test "$GITHUB_SHA" = "$EXPECTED_COMMIT"
+          test "$(sha256sum .github/workflows/bootstrap-publish.yml | cut -d' ' -f1)" = "$EXPECTED_WORKFLOW_SHA256"
+
+      - name: Install without lifecycle scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Verify source and quality gates
+        env:
+          EXPECTED_SOURCE_SHA256: ${{ inputs.expected_source_sha256 }}
+        run: |
+          test "$(node tooling/release/push-approved-source.mjs --hash-root .)" = "$EXPECTED_SOURCE_SHA256"
+          npm run check
+          npm test -- --run
+          npm run supply-chain:check
+          node tooling/package-checks/check-publish-workflow.mjs .github/workflows/publish.yml
+          node tooling/package-checks/check-publish-workflow.mjs .github/workflows/bootstrap-publish.yml --allow-token-publish
+          npm audit --audit-level=high
+          npm audit --omit=dev --audit-level=high
+          npm audit signatures
+
+      - name: Rebuild and verify approved tarball
+        env:
+          EXPECTED_TARBALL_SHA256: ${{ inputs.expected_tarball_sha256 }}
+        run: |
+          mkdir -p artifacts/tarballs
+          node tooling/package-checks/pack-and-smoke.mjs --pack-only --tarball-dir artifacts/tarballs --output artifacts/package-smoke.json
+          test "$(jq -r .tarballSha256 artifacts/package-smoke.json)" = "$EXPECTED_TARBALL_SHA256"
+
+      - name: Publish approved tarball with one-time bootstrap token
+        if: ${{ !inputs.dry_run }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish artifacts/tarballs/pi-extension-doctor-*.tgz --ignore-scripts --provenance --access public

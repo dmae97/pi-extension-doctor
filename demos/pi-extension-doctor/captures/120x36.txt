@@ -1,0 +1,4 @@
+extension-doctor findings findings=3 scanned=7
+[confirmed] duplicate-command pi-alpha src/index.ts
+[confirmed] duplicate-command pi-beta extension.ts
+[inferred] stale-mariozechner-import pi-legacy src/legacy.ts

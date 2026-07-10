@@ -1,0 +1,40 @@
+{
+  "name": "pi-extension-doctor",
+  "version": "0.1.0",
+  "description": "Read-only diagnostics for Pi extension conflicts and stale APIs",
+  "type": "module",
+  "license": "MIT",
+  "author": "dmae97",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmae97/pi-extension-doctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dmae97/pi-extension-doctor/issues"
+  },
+  "homepage": "https://github.com/dmae97/pi-extension-doctor#readme",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "diagnostics"
+  ],
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "video": "https://raw.githubusercontent.com/dmae97/pi-extension-doctor/v0.1.0/demos/pi-extension-doctor/assets/demo.mp4",
+    "image": "https://raw.githubusercontent.com/dmae97/pi-extension-doctor/v0.1.0/demos/pi-extension-doctor/assets/poster.webp"
+  }
+}

@@ -1,0 +1,551 @@
+{
+  "version": 1,
+  "packages": [
+    {
+      "id": "duplicate-command-1",
+      "manifest": {
+        "name": "@fixture/duplicate-command-1",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-1.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-1.ts": "export default function activate(pi) { pi.registerCommand(\"shared-1\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-1.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-command-2",
+      "manifest": {
+        "name": "@fixture/duplicate-command-2",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-2.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-2.ts": "export default function activate(pi) { pi.registerCommand(\"shared-1\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-2.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-command-3",
+      "manifest": {
+        "name": "@fixture/duplicate-command-3",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-3.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-3.ts": "export default function activate(pi) { pi.registerCommand(\"shared-2\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-3.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-command-4",
+      "manifest": {
+        "name": "@fixture/duplicate-command-4",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-4.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-4.ts": "export default function activate(pi) { pi.registerCommand(\"shared-2\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-4.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-command-5",
+      "manifest": {
+        "name": "@fixture/duplicate-command-5",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-5.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-5.ts": "export default function activate(pi) { pi.registerCommand(\"shared-3\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-5.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-command-6",
+      "manifest": {
+        "name": "@fixture/duplicate-command-6",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/duplicate-6.ts"]
+        }
+      },
+      "files": {
+        "src/duplicate-6.ts": "export default function activate(pi) { pi.registerCommand(\"shared-3\", { description: \"shared\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-command",
+          "confidence": "inferred",
+          "location": "src/duplicate-6.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-1",
+      "manifest": {
+        "name": "@fixture/stale-import-1",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-1.ts"]
+        }
+      },
+      "files": {
+        "src/stale-1.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-1.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-2",
+      "manifest": {
+        "name": "@fixture/stale-import-2",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-2.ts"]
+        }
+      },
+      "files": {
+        "src/stale-2.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-2.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-3",
+      "manifest": {
+        "name": "@fixture/stale-import-3",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-3.ts"]
+        }
+      },
+      "files": {
+        "src/stale-3.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-3.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-4",
+      "manifest": {
+        "name": "@fixture/stale-import-4",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-4.ts"]
+        }
+      },
+      "files": {
+        "src/stale-4.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-4.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-5",
+      "manifest": {
+        "name": "@fixture/stale-import-5",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-5.ts"]
+        }
+      },
+      "files": {
+        "src/stale-5.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-5.ts"
+        }
+      ]
+    },
+    {
+      "id": "stale-import-6",
+      "manifest": {
+        "name": "@fixture/stale-import-6",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/stale-6.ts"]
+        }
+      },
+      "files": {
+        "src/stale-6.ts": "import { helper } from \"@mariozechner/pi-coding-agent\";\nexport default function activate() { return helper; }\n"
+      },
+      "expected": [
+        {
+          "rule": "stale-mariozechner-import",
+          "confidence": "inferred",
+          "location": "src/stale-6.ts"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-1",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-1",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-1.ts", "src/manifest-1.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-1.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-2",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-2",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-2.ts", "src/manifest-2.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-2.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-3",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-3",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-3.ts", "src/manifest-3.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-3.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-4",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-4",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-4.ts", "src/manifest-4.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-4.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-5",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-5",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-5.ts", "src/manifest-5.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-5.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "duplicate-manifest-6",
+      "manifest": {
+        "name": "@fixture/duplicate-manifest-6",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/manifest-6.ts", "src/manifest-6.ts"]
+        }
+      },
+      "files": {
+        "src/manifest-6.ts": "export default function activate() {}\n"
+      },
+      "expected": [
+        {
+          "rule": "duplicate-manifest-entry",
+          "confidence": "inferred",
+          "location": "package.json"
+        }
+      ]
+    },
+    {
+      "id": "clean-1",
+      "manifest": {
+        "name": "@fixture/clean-1",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-1.ts"]
+        }
+      },
+      "files": {
+        "src/clean-1.ts": "// Historical text mentions @mariozechner/pi-coding-agent but imports nothing.\nexport default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-2",
+      "manifest": {
+        "name": "@fixture/clean-2",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-2.ts"]
+        }
+      },
+      "files": {
+        "src/clean-2.ts": "const text = 'registerCommand(\\\"not-a-call\\\")';\nexport default function activate() { return text; }\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-3",
+      "manifest": {
+        "name": "@fixture/clean-3",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-3.ts"]
+        }
+      },
+      "files": {
+        "src/clean-3.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-4",
+      "manifest": {
+        "name": "@fixture/clean-4",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-4.ts"]
+        }
+      },
+      "files": {
+        "src/clean-4.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-5",
+      "manifest": {
+        "name": "@fixture/clean-5",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-5.ts"]
+        }
+      },
+      "files": {
+        "src/clean-5.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-6",
+      "manifest": {
+        "name": "@fixture/clean-6",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-6.ts"]
+        }
+      },
+      "files": {
+        "src/clean-6.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-7",
+      "manifest": {
+        "name": "@fixture/clean-7",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-7.ts"]
+        }
+      },
+      "files": {
+        "src/clean-7.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "clean-8",
+      "manifest": {
+        "name": "@fixture/clean-8",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-8.ts"]
+        }
+      },
+      "files": {
+        "src/clean-8.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    },
+    {
+      "id": "suffixed-command",
+      "manifest": {
+        "name": "@fixture/suffixed-command",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/index.ts"]
+        }
+      },
+      "files": {
+        "src/index.ts": "export default function activate(pi) { pi.registerCommand(\"copy\", { description: \"copy\", handler: async () => {} }); pi.registerCommand(\"copy.1\", { description: \"copy duplicate\", handler: async () => {} }); }\n"
+      },
+      "expected": [
+        {
+          "rule": "suffixed-command-id",
+          "confidence": "inferred",
+          "location": "src/index.ts"
+        }
+      ]
+    },
+    {
+      "id": "ui-owner",
+      "manifest": {
+        "name": "@fixture/ui-owner",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/index.ts"]
+        }
+      },
+      "files": {
+        "src/index.ts": "export default function activate(pi) { pi.on(\"session_start\", (_event, ctx) => ctx.ui.setFooter(() => ({ render: () => [] }))); }\n"
+      },
+      "expected": [
+        {
+          "rule": "ui-owner-registration",
+          "confidence": "inferred",
+          "location": "src/index.ts"
+        }
+      ]
+    },
+    {
+      "id": "missing-cleanup",
+      "manifest": {
+        "name": "@fixture/missing-cleanup",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/index.ts"]
+        }
+      },
+      "files": {
+        "src/index.ts": "export default function activate() { setInterval(() => {}, 1000); }\n"
+      },
+      "expected": [
+        {
+          "rule": "missing-cleanup",
+          "confidence": "inferred",
+          "location": "src/index.ts"
+        }
+      ]
+    },
+    {
+      "id": "clean-9",
+      "manifest": {
+        "name": "@fixture/clean-9",
+        "version": "1.0.0",
+        "pi": {
+          "extensions": ["src/clean-9.ts"]
+        }
+      },
+      "files": {
+        "src/clean-9.ts": "export default function activate() {}\n"
+      },
+      "expected": []
+    }
+  ]
+}
