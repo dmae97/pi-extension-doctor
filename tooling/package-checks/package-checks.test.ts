@@ -20,7 +20,8 @@ describe("release package checks", () => {
   afterAll(() => rmSync(work, { recursive: true, force: true }));
 
   it("passes deterministic local supply-chain checks without registry credentials", () => {
-    const output = join(work, "supply.json");
+    // Nested path regression: a fresh checkout has no artifacts/ directory.
+    const output = join(work, "fresh-checkout/artifacts/supply.json");
     const result = run("tooling/package-checks/check-supply-chain.mjs", [
       "--offline",
       "--output",
